@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Geocoding Service</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <div class="bottom-section">
+    <div>
+      <h3>Calcul des distances</h3>
+      <div class="form-control">
+        <label for="start">Adresse de depart:</label>
+        <input type="text" id="start" name="start">
+      </div>
+
+      <div class="form-control">
+        <label for="end">Adresse de destination:</label>
+        <input type="text" id="end" name="end">
+      </div>
+
+      <div class="form-control">
+        <button onclick="calculateDistance()">Calculer la distance</button>
+      </div>
+      <div id="distance-result"></div>
+    </div>
+
+    <div>
+      <h3>Rendez-vous</h3>
+      <button onclick="changeDate(-1)">Precedent</button>
+      <input type="date" id="date" onchange="loadAppointments()">
+      <button onclick="changeDate(1)">Suivant</button>
+      <div id="appointments"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Jwfw_OPQWziQPCuDnkVI699cR0Y5Lhc&callback=initMap&libraries=places" async defer></script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+</body>
+
+</html>
