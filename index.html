@@ -4,26 +4,47 @@
 <head>
   <meta charset="UTF-8">
   <title>Geocoding Service</title>
+   
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="script.js"></script>
   
 </head>
 
 <body>
   <div id="loadingCircle"></div>
-  <div id="map"></div>
-  <input type="text" id="start" placeholder="Entrez une adresse">
-
   
+  
+    <div id="distance-container" style="display: none;">
+      <span id="close-distance-container" style="cursor: pointer; float: right; font-size: 20px; margin-right: 10px;" onclick="toggleDistanceContainer()">&times;</span>
+      <h3>Calcul des distances</h3>
+      <div class="form-control">
+        <label for="start">Adresse de départ:</label>
+        <input type="text" id="start" name="start">
+      </div>
+
+      <div class="form-control">
+        <label for="end">Adresse de destination:</label>
+        <input type="text" id="end" name="end">
+      </div>
+
+      <div class="form-control">
+        <button onclick="calculateDistance()">Calculer la distance</button>
+      </div>
+      <div id="distance-result"></div>
+    </div>
+  
+  <div id="map"></div>
+
   <script>
   document.addEventListener('DOMContentLoaded', (event) => {
     setTimeout(() => {
         document.getElementById('loadingCircle').style.display = 'none';
     }, 6000);
-});
+});</script>
 
 
-</script>
-  <script src="script.js"></script>
+
+  
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Jwfw_OPQWziQPCuDnkVI699cR0Y5Lhc&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1" async defer></script>
   <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
   
