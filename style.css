@@ -10,6 +10,38 @@ body {
   margin-bottom: 1em;
 }
 
+/* Style par défaut pour les écrans plus larges */
+#distance-container {
+  position: absolute; /* ou 'fixed' selon votre disposition actuelle */
+    top: 10px; /* Distance du haut */
+    left: 10px; /* Distance du côté gauche */
+    max-width: 300px; /* Largeur maximale du conteneur */
+    min-height: 100px; /* Hauteur minimale, ajustez selon le contenu */
+    z-index: 5; /* S'assure qu'il se trouve au-dessus des autres éléments */
+    padding: 10px; /* Espace interne pour le contenu */
+    background-color: rgba(255, 255, 255, 0.9); /* Couleur d'arrière-plan avec transparence */
+    border-radius: 5px; /* Bords arrondis */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Ombre pour un aspect en relief */
+    overflow: auto; /* Ajoute des barres de défilement si nécessaire */
+    /* Ajoutez d'autres styles comme border, font-size, etc. selon vos besoins */
+  /*position: absolute;
+  top: 10px;  Ajustez selon vos besoins 
+  right: 10px;
+  z-index: 5; /* S'assure qu'il se trouve au-dessus de la carte */
+  /* Autres styles... */
+}
+
+/* Style pour les écrans plus petits */
+@media screen and (max-width: 600px) {
+  #distance-container {
+      top: auto;
+      bottom: 10px; /* Positionne le conteneur en bas pour les petits écrans */
+      right: 10px;
+      width: calc(100% - 20px); /* Pleine largeur moins une marge */
+  }
+}
+
+
 .form-control {
   display: flex;
   align-items: center;
@@ -27,10 +59,16 @@ body {
 }
 
 .bottom-section {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 10px;
+  padding: 5px;
+  font-family: Roboto, sans-serif;
+  font-size: large;
+  font-weight: bold;
 }
+
 
 .bottom-section > div {
   width: 100%;
