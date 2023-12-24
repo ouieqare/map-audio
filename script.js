@@ -71,34 +71,13 @@ function toggleDistanceContainer() {
   }
   distanceContainerVisible = !distanceContainerVisible;
 }
-// ...
 
-// ...
 
 function addDistanceCalculationContainer() {
   var distanceSectionDiv = document.createElement("div");
   distanceSectionDiv.id = "distance-container";
   distanceSectionDiv.innerHTML = `
-    <div class="bottom-section">
-      <div>
-        <span id="close-distance-container" style="cursor: pointer; float: right; font-size: 20px; margin-right: 10px;" onclick="toggleDistanceContainer()">&times;</span>
-        <h3>Calcul des distances</h3>
-        <div class="form-control">
-          <label for="start">Adresse de départ:</label>
-          <input type="text" id="start" name="start">
-        </div>
-  
-        <div class="form-control">
-          <label for="end">Adresse de destination:</label>
-          <input type="text" id="end" name="end">
-        </div>
-  
-        <div class="form-control">
-          <button onclick="calculateDistance()">Calculer la distance</button>
-        </div>
-        <div id="distance-result"></div>
-      </div>
-    </div>
+    
   `;
   distanceSectionDiv.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
   distanceSectionDiv.style.padding = "10px";
@@ -126,14 +105,8 @@ function addDistanceCalculationContainer() {
   toggleButton.onclick = toggleDistanceContainer;
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
-// Ajouter le contrôle personnalisé à la carte
-map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
-
 }
 
-// ...
-
-// ...
 
 
 async function initMap() {
@@ -143,8 +116,6 @@ async function initMap() {
     .filter((center) => center.Sleeping === false)
     .map(mapAccountData);
   window.centers = centers;
-
-
 
   var center = { lat: 48.8566, lng: 2.3522 };
   map = new google.maps.Map(document.getElementById("map"), {
@@ -177,7 +148,6 @@ async function initMap() {
       return;
     }
 })
-
 
   var geocoder = new google.maps.Geocoder();
 
@@ -224,9 +194,7 @@ async function initMap() {
 
         var infoWindow = new google.maps.InfoWindow({
           content: infoWindowContent,
-        });
-
-     
+        });     
 
         marker.addListener("click", function () {
           document.getElementById("end").value = center.address;
@@ -251,43 +219,10 @@ async function initMap() {
       }
     });
   });
-
-  var autocompleteStart = new google.maps.places.Autocomplete(
-    document.getElementById("start"),
-    { types: ["geocode"] }
-  );
-  
-  autocompleteStart.setFields(["address_component"]);
-  autocompleteStart.addListener("place_changed", function () {
-    geocodeStartAddress();
-  });
-  
+ 
   addDistanceCalculationContainer();
   initializeAutocomplete();
 }
-// Initialisation de l'Autocomplete
-function initializeAutocomplete() {
-  var input = document.getElementById('start');
-  if (!input) {
-    console.error("L'élément 'start' n'a pas été trouvé.");
-    return;
-  }
-
-  var autocomplete = new google.maps.places.Autocomplete(input, { types: ['geocode'] });
-  autocomplete.bindTo('bounds', map);
-
-  autocomplete.addListener('place_changed', function() {
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      console.log("Erreur: L'endroit sélectionné n'a pas de géométrie.");
-      return;
-    }
-    map.setCenter(place.geometry.location);
-  });
-}
-
-
-
 
 function calculateDistance() {
 
@@ -377,31 +312,7 @@ function calculateDistance() {
   );
 }
 
-// function getMarkerIcon(center) {
-//   markerColor = center.markerColor
-//     ? center.markerColor.toLowerCase()
-//     : "yellow";
-//   switch (markerColor) {
-//     case "red":
-//       return "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
-//     case "yellow":
-//       return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-//     case "blue":
-//       return "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-//     case "green":
-//       return "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
-//     case "ltblue":
-//       return "https://maps.google.com/mapfiles/ms/icons/ltblue-dot.png";
-//     case "orange":
-//       return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png";
-//     case "pink":
-//       return "https://maps.google.com/mapfiles/ms/icons/pink-dot.png";
-//     case "purple":
-//       return "https://maps.google.com/mapfiles/ms/icons/purple-dot.png";
-//     default:
-//       return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-//   }
-// }
+
 
 function getMarkerIcon(center) {
     var markerShape = center.markerShape
@@ -720,5 +631,3 @@ function addMarkerListener(marker, appointment) {
     openInfoWindow = infoWindow; // Mettre à jour l'info-bulle ouverte actuellement
   });
 }
-
-
