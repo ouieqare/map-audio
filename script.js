@@ -33,7 +33,15 @@ function geocodeStartAddress() {
 async function fetchAllAccounts() {
   try {
     const response = await fetch("https://asia-south1-mentorwise-384110.cloudfunctions.net/zoho-retriever");
-    return response.json();
+    // return response.json();
+    
+    const data = await response.json();
+    console.log("Données reçues:", data); // Afficher les données brutes
+
+    const filteredData = data.accounts.filter(account => account.Layout && account.Layout.name === "Centre");
+    console.log("Données filtrées:", filteredData); // Afficher les données après filtrage
+
+    return { ...data, account: filteredData };
   } catch (error) {
     console.error("Erreur lors de la récupération des comptes : ", error);
     // Gérer l'erreur selon vos besoins
@@ -112,6 +120,7 @@ function addDistanceCalculationContainer() {
 async function initMap() {
   const data = await fetchAllAccounts();
   const centers = data.accounts
+    // .filter((center) => center.Disposition === "Centre")
     .filter((center) => center.Maison_m_re === false)
     .filter((center) => center.Sleeping === false)
     .map(mapAccountData);
@@ -134,6 +143,7 @@ async function initMap() {
   var input = document.getElementById('start'); // Assurez-vous que cet ID correspond à votre champ de saisie
   var autocompleteOptions = {
     types: ['geocode'], // ou autres types selon vos besoins
+    componentRestrictions: { country: 'fr' }
   };
 
   var autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
