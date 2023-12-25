@@ -14,7 +14,7 @@ body {
 #distance-container {
   position: absolute; /* ou 'fixed' selon votre disposition actuelle */
     top: 10px; /* Distance du haut */
-    left: 10px; /* Distance du côté gauche */
+    right: 50px; /* Distance du côté droit */
     max-width: 300px; /* Largeur maximale du conteneur */
     min-height: 100px; /* Hauteur minimale, ajustez selon le contenu */
     z-index: 5; /* S'assure qu'il se trouve au-dessus des autres éléments */
@@ -116,6 +116,29 @@ button {
 @keyframes spin {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+#legend-container {
+  position: fixed; /* ou absolute selon vos besoins */
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  width: 200px;
+  height: 300px;
+  /* Autres styles... */
+}
+
+.legend-item {
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.legend-item img {
+  margin-right: 5px;
 }
 
 
