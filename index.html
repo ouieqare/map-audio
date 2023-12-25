@@ -32,8 +32,30 @@
       </div>
       <div id="distance-result"></div>
     </div>
+
+    
+
   
   <div id="map"></div>
+  <div id="legend-container" style="display: none;">
+    <span id="close-legend-container" style="cursor: pointer; float: right; font-size: 20px; margin-right: 10px;" onclick="toggleLegendContainer()">&times;</span>
+    <h3>Légende de la Carte</h3>
+    <!-- Exemple d'élément de légende -->
+    <div class="legend-item" >
+      <img src="http://maps.google.com/mapfiles/kml/paddle/blu-circle.png" alt="Pictogram" style="width: 30px; height: 30px;"> 
+      <span>Description</span>
+      <br>
+      <img src="http://maps.google.com/mapfiles/kml/paddle/ltblu-square.png" alt="Pictogram" style="width: 30px; height: 30px;">
+      <span>Description</span>
+      <br>
+      <img src="http://maps.google.com/mapfiles/kml/paddle/red-diamond.png" alt="Pictogram" style="width: 30px; height: 30px;">
+      <span>Description</span>
+      <br>
+      <img src="http://maps.google.com/mapfiles/kml/paddle/pink-stars.png" alt="Pictogram" style="width: 30px; height: 30px;">
+      <span>Description</span>
+    </div>
+    <!-- Ajoutez d'autres éléments ici -->
+  </div>
 
   <script>
   document.addEventListener('DOMContentLoaded', (event) => {
