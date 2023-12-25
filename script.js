@@ -3,33 +3,29 @@ var markers = [];
 var startMarker;
 var openInfoWindow = null;
 
-function geocodeStartAddress() {
-  var startAddress = document.getElementById("start").value;
-  var geocoder = new google.maps.Geocoder();
+// function geocodeStartAddress() {
+//   var startAddress = document.getElementById("start").value;
+//   var geocoder = new google.maps.Geocoder();
 
-  geocoder.geocode({ address: startAddress }, function (results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      // Supprimer le marqueur précédent, s'il existe
-      if (startMarker) {
-        startMarker.setMap(null);
-      }
+//   
 
-      var location = results[0].geometry.location;
 
-      // Ajouter un nouveau marqueur avec un picot vert
-      startMarker = new google.maps.Marker({
-        map: map,
-        position: location,
-        icon: "http://maps.google.com/mapfiles/kml/paddle/go.png",
-      });
+//       var location = results[0].geometry.location;
 
-      // Déplace la carte pour qu'elle soit centrée sur le nouveau marqueur
-      map.setCenter(location);
-    } else {
-      console.log("Erreur de géocodage pour l'adresse de départ : " + status);
-    }
-  });
-}
+//       // Ajouter un nouveau marqueur avec un picot vert
+//       startMarker = new google.maps.Marker({
+//         map: map,
+//         position: location,
+//         icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+//       });
+
+//       // Déplace la carte pour qu'elle soit centrée sur le nouveau marqueur
+//       map.setCenter(location);
+//     } else {
+//       console.log("Erreur de géocodage pour l'adresse de départ : " + status);
+//     }
+//   });
+// }
 async function fetchAllAccounts() {
   try {
     const response = await fetch("https://asia-south1-mentorwise-384110.cloudfunctions.net/zoho-retriever");
@@ -80,6 +76,15 @@ function toggleDistanceContainer() {
   distanceContainerVisible = !distanceContainerVisible;
 }
 
+function toggleLegendContainer() {
+  var container = document.getElementById('legend-container');
+  if (container.style.display === 'none') {
+    container.style.display = 'block';
+  } else {
+    container.style.display = 'none';
+  }
+}
+
 
 function addDistanceCalculationContainer() {
   var distanceSectionDiv = document.createElement("div");
@@ -112,6 +117,21 @@ function addDistanceCalculationContainer() {
   toggleButton.style.marginBottom = '10px'; // Ajoute un peu d'espace en bas du bouton
   toggleButton.onclick = toggleDistanceContainer;
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
+
+  
+  
+// Ajouter le bouton pour afficher/masquer la section de calcul de distance
+var toggleButton = document.createElement('button');
+toggleButton.textContent = 'Legende';
+toggleButton.style.backgroundColor = '#007bff';
+toggleButton.style.color = '#fff';
+toggleButton.style.border = 'none';
+toggleButton.style.padding = '10px 15px';
+toggleButton.style.borderRadius = '5px';
+toggleButton.style.cursor = 'pointer';
+toggleButton.style.marginBottom = '10px'; // Ajoute un peu d'espace en bas du bouton
+toggleButton.onclick = toggleLegendContainer;
+map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
 }
 
@@ -234,6 +254,113 @@ async function initMap() {
   initializeAutocomplete();
 }
 
+// function calculateDistance() {
+
+//   var startAddress = document.getElementById("start").value;
+//   var endAddress = document.getElementById("end").value;
+
+//   var geocoder = new google.maps.Geocoder();
+
+//   geocoder.geocode(
+//     { address: startAddress },
+//     function (startResults, startStatus) {
+//       if (startStatus === google.maps.GeocoderStatus.OK) {
+//         var startLocation = startResults[0].geometry.location;
+
+//         startMarker = new google.maps.Marker({
+//           map: map,
+//           position: startLocation,
+//           icon: "http://maps.google.com/mapfiles/kml/paddle/go.png",
+//         });
+//         map.setCenter(startLocation);
+
+//         geocoder.geocode(
+//           {
+//             address: endAddress,
+//           },
+//           function (endResults, endStatus) {
+//             if (endStatus === google.maps.GeocoderStatus.OK) {
+//               var endLocation = endResults[0].geometry.location;
+
+//               var distanceService = new google.maps.DistanceMatrixService();
+
+//               // Calcul pour le mode de déplacement en voiture
+//               calculateAndDisplayRoute(distanceService, startLocation, endLocation, "DRIVING", "distance-result");
+
+//               // Calcul pour le mode de déplacement à pied
+//               calculateAndDisplayRoute(distanceService, startLocation, endLocation, "WALKING", "walking-distance-result");
+
+//               // Calcul pour le mode de déplacement en transport en commun
+//               calculateAndDisplayRoute(distanceService, startLocation, endLocation, "TRANSIT", "transit-distance-result");
+
+//             } else {
+//               console.log(
+//                 "Erreur de géocodage pour l'adresse de destination: " +
+//                   endStatus
+//               );
+//             }
+//           }
+//         );
+//       } else {
+//         console.log(
+//           "Erreur de géocodage pour l'adresse de départ: " + startStatus
+//         );
+//       }
+//     }
+//   );
+// }
+
+// var currentDirectionsDisplay;
+
+// function calculateAndDisplayRoute(distanceService, startLocation, endLocation, travelMode, resultElementId) {
+
+//               distanceService.getDistanceMatrix(
+//                 {
+//                   origins: [startLocation],
+//                   destinations: [endLocation],
+//                   travelMode: travelMode,
+//                 },
+//                 function (response, status) {
+//                   if (status === "OK") {
+//                     var distance = response.rows[0].elements[0].distance.text;
+//                     var duration = response.rows[0].elements[0].duration.text;
+
+//                     var resultElement = document.getElementById("distance-result");
+//                     resultElement.innerHTML = "Distance (" + travelMode + "): " + distance + "<br>" + "Duration: " + duration;
+//                     var resultElement = document.getElementById("walking-distance-result");
+//                     resultElement.innerHTML = "Distance (" + travelMode + "): " + distance + "<br>" + "Duration: " + duration;
+//                     var resultElement = document.getElementById("transit-distance-result");
+//                     resultElement.innerHTML = "Distance (" + travelMode + "): " + distance + "<br>" + "Duration: " + duration;
+
+                    
+
+//                     // Affichage du trajet sur la carte
+//                     var directionsService = new google.maps.DirectionsService();
+//                     var directionsDisplay = new google.maps.DirectionsRenderer({
+//                       map: map,
+//                       polylineOptions: {
+//                         strokeColor: "blue",
+//                       },
+//                     });                
+
+//                     directionsService.route(request, function (result, status) {
+//                       if (status === "OK") {
+//                         directionsDisplay.setDirections(result);
+//                       } else {
+//                         console.log(
+//                           "Erreur lors de l'affichage du trajet: " + status
+//                         );
+//                       }
+//                     });
+//                   } else {
+//                     console.log("Erreur de calcul de distance: " + status);
+//                   }
+//                 }
+//               );
+// }
+
+var directionsDisplay;
+            
 function calculateDistance() {
 
   var startAddress = document.getElementById("start").value;
@@ -241,11 +368,25 @@ function calculateDistance() {
 
   var geocoder = new google.maps.Geocoder();
 
+  // Effacer le marqueur précédent, s'il existe
+  if (startMarker) {
+    startMarker.setMap(null);
+  }
+
   geocoder.geocode(
     { address: startAddress },
     function (startResults, startStatus) {
       if (startStatus === google.maps.GeocoderStatus.OK) {
         var startLocation = startResults[0].geometry.location;
+
+        startMarker = new google.maps.Marker({
+                    map: map,
+                    position: startLocation,
+                    icon: "http://maps.google.com/mapfiles/kml/paddle/go.png",
+                  });
+                  map.setCenter(startLocation);
+
+                  
 
         geocoder.geocode(
           {
@@ -278,12 +419,19 @@ function calculateDistance() {
 
                     // Affichage du trajet sur la carte
                     var directionsService = new google.maps.DirectionsService();
-                    var directionsDisplay = new google.maps.DirectionsRenderer({
-                      map: map,
-                      polylineOptions: {
-                        strokeColor: "blue",
-                      },
-                    });
+                   // Vérifier si directionsDisplay a déjà été créé
+        if (!window.directionsDisplay) {
+          window.directionsDisplay = new google.maps.DirectionsRenderer();
+      }
+
+      // Réinitialiser directionsDisplay
+      window.directionsDisplay.setMap(null);
+      window.directionsDisplay.setMap(map); // Liez-le à la carte actuelle
+      window.directionsDisplay.setOptions({
+          polylineOptions: {
+              strokeColor: "blue",
+          }
+      });
 
                     var request = {
                       origin: startLocation,
@@ -318,10 +466,10 @@ function calculateDistance() {
           "Erreur de géocodage pour l'adresse de départ: " + startStatus
         );
       }
+      
     }
   );
 }
-
 
 
 function getMarkerIcon(center) {
@@ -332,29 +480,86 @@ function getMarkerIcon(center) {
     var iconSize = new google.maps.Size(30, 30); // Taille de l'icône
   
     switch (markerShape) {
-      case "circle":
+      case "circle blue":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
         break;
-      case "square":
+      case "circle green":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/grn-circle.png";
+        break;
+      case "circle light blue":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ltblu-circle.png";
+        break;
+      case "circle pink":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/pink-circle.png";
+        break;
+      case "circle red":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/red-circle.png";
+        break;
+      case "circle yellow":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png";
+        break;
+      case "circle orange":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/orange-circle.png";
+        break;
+      case "square blue":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-square.png";
+        break;
+      case "square green":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/grn-square.png";
+        break;
+      case "square pink":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/pink-square.png";
+        break;
+      case "square light blue":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ltblu-square.png";
         break;
-      case "diamond":
+      case "square red":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/stop.png";
+        break;
+      case "square yellow":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ylw-square.png";
+        break;
+      case "square orange":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/orange-square.png";
+        break;
+      case "diamond red":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/red-diamond.png";
         break;
-      case "star":
+      case "diamond blue":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-diamond.png";
+        break;
+      case "diamond green":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/grn-diamond.png";
+        break;
+      case "diamond light blue":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ltblu-diamond.png";
+        break;
+      case "diamond yellow":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ylw-diamond.png";
+        break;
+      case "diamond orange":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/orange-diamond.png";
+        break;
+      case "diamond pink":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/pink-diamond.png";
+        break;
+      case "star pink":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/pink-stars.png";
         break;
-      case "pause":
-        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/pause.png";
+      case "star blue":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-stars.png";
         break;
-      case "grand":
-            iconUrl = "http://maps.google.com/mapfiles/kml/paddle/G.png";
+      case "star green":
+            iconUrl = "http://maps.google.com/mapfiles/kml/paddle/grn-stars.png";
             break;
-      case "moyen":
-        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/M.png";
+      case "star light blue":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ltblu-stars.png";
         break;
-      case "petit":
-        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/P.png";
+      case "star yellow":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/ylw-stars.png";
+        break;
+      case "star orange":
+        iconUrl = "http://maps.google.com/mapfiles/kml/paddle/orange-stars.png";
         break;
       default:
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
