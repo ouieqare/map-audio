@@ -3,29 +3,7 @@ var markers = [];
 var startMarker;
 var openInfoWindow = null;
 
-// function geocodeStartAddress() {
-//   var startAddress = document.getElementById("start").value;
-//   var geocoder = new google.maps.Geocoder();
 
-//   
-
-
-//       var location = results[0].geometry.location;
-
-//       // Ajouter un nouveau marqueur avec un picot vert
-//       startMarker = new google.maps.Marker({
-//         map: map,
-//         position: location,
-//         icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
-//       });
-
-//       // Déplace la carte pour qu'elle soit centrée sur le nouveau marqueur
-//       map.setCenter(location);
-//     } else {
-//       console.log("Erreur de géocodage pour l'adresse de départ : " + status);
-//     }
-//   });
-// }
 async function fetchAllAccounts() {
   try {
     const response = await fetch("https://asia-south1-mentorwise-384110.cloudfunctions.net/zoho-retriever");
@@ -63,7 +41,7 @@ function mapAccountData(source) {
   };
 }
 
-// Ajoutez ces fonctions à votre script.js
+
 let distanceContainerVisible = false;
 
 function toggleDistanceContainer() {
@@ -160,9 +138,9 @@ async function initMap() {
   window.map = map;
 
   // Ajout de l'autocomplétion
-  var input = document.getElementById('start'); // Assurez-vous que cet ID correspond à votre champ de saisie
+  var input = document.getElementById('start'); 
   var autocompleteOptions = {
-    types: ['geocode'], // ou autres types selon vos besoins
+    types: ['geocode'],
     componentRestrictions: { country: 'fr' }
   };
 
@@ -253,111 +231,6 @@ async function initMap() {
   addDistanceCalculationContainer();
   initializeAutocomplete();
 }
-
-// function calculateDistance() {
-
-//   var startAddress = document.getElementById("start").value;
-//   var endAddress = document.getElementById("end").value;
-
-//   var geocoder = new google.maps.Geocoder();
-
-//   geocoder.geocode(
-//     { address: startAddress },
-//     function (startResults, startStatus) {
-//       if (startStatus === google.maps.GeocoderStatus.OK) {
-//         var startLocation = startResults[0].geometry.location;
-
-//         startMarker = new google.maps.Marker({
-//           map: map,
-//           position: startLocation,
-//           icon: "http://maps.google.com/mapfiles/kml/paddle/go.png",
-//         });
-//         map.setCenter(startLocation);
-
-//         geocoder.geocode(
-//           {
-//             address: endAddress,
-//           },
-//           function (endResults, endStatus) {
-//             if (endStatus === google.maps.GeocoderStatus.OK) {
-//               var endLocation = endResults[0].geometry.location;
-
-//               var distanceService = new google.maps.DistanceMatrixService();
-
-//               // Calcul pour le mode de déplacement en voiture
-//               calculateAndDisplayRoute(distanceService, startLocation, endLocation, "DRIVING", "distance-result");
-
-//               // Calcul pour le mode de déplacement à pied
-//               calculateAndDisplayRoute(distanceService, startLocation, endLocation, "WALKING", "walking-distance-result");
-
-//               // Calcul pour le mode de déplacement en transport en commun
-//               calculateAndDisplayRoute(distanceService, startLocation, endLocation, "TRANSIT", "transit-distance-result");
-
-//             } else {
-//               console.log(
-//                 "Erreur de géocodage pour l'adresse de destination: " +
-//                   endStatus
-//               );
-//             }
-//           }
-//         );
-//       } else {
-//         console.log(
-//           "Erreur de géocodage pour l'adresse de départ: " + startStatus
-//         );
-//       }
-//     }
-//   );
-// }
-
-// var currentDirectionsDisplay;
-
-// function calculateAndDisplayRoute(distanceService, startLocation, endLocation, travelMode, resultElementId) {
-
-//               distanceService.getDistanceMatrix(
-//                 {
-//                   origins: [startLocation],
-//                   destinations: [endLocation],
-//                   travelMode: travelMode,
-//                 },
-//                 function (response, status) {
-//                   if (status === "OK") {
-//                     var distance = response.rows[0].elements[0].distance.text;
-//                     var duration = response.rows[0].elements[0].duration.text;
-
-//                     var resultElement = document.getElementById("distance-result");
-//                     resultElement.innerHTML = "Distance (" + travelMode + "): " + distance + "<br>" + "Duration: " + duration;
-//                     var resultElement = document.getElementById("walking-distance-result");
-//                     resultElement.innerHTML = "Distance (" + travelMode + "): " + distance + "<br>" + "Duration: " + duration;
-//                     var resultElement = document.getElementById("transit-distance-result");
-//                     resultElement.innerHTML = "Distance (" + travelMode + "): " + distance + "<br>" + "Duration: " + duration;
-
-                    
-
-//                     // Affichage du trajet sur la carte
-//                     var directionsService = new google.maps.DirectionsService();
-//                     var directionsDisplay = new google.maps.DirectionsRenderer({
-//                       map: map,
-//                       polylineOptions: {
-//                         strokeColor: "blue",
-//                       },
-//                     });                
-
-//                     directionsService.route(request, function (result, status) {
-//                       if (status === "OK") {
-//                         directionsDisplay.setDirections(result);
-//                       } else {
-//                         console.log(
-//                           "Erreur lors de l'affichage du trajet: " + status
-//                         );
-//                       }
-//                     });
-//                   } else {
-//                     console.log("Erreur de calcul de distance: " + status);
-//                   }
-//                 }
-//               );
-// }
 
 var directionsDisplay;
             
