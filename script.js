@@ -12,10 +12,10 @@ async function fetchAllAccounts() {
     const data = await response.json();
     console.log("Données reçues:", data); // Afficher les données brutes
 
-    const filteredData = data.accounts.filter(account => account.Layout && account.Layout.name === "Centre");
+    const filteredData = data.accounts.filter(accounts => accounts.Layout && accounts.Layout.name === "Centre");
     console.log("Données filtrées:", filteredData); // Afficher les données après filtrage
 
-    return { ...data, account: filteredData };
+    return { ...data, accounts: filteredData };
   } catch (error) {
     console.error("Erreur lors de la récupération des comptes : ", error);
     // Gérer l'erreur selon vos besoins
