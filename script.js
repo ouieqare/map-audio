@@ -13,7 +13,8 @@ async function fetchAllAccounts() {
     const data = await response.json();
     console.log("Données reçues:", data); // Afficher les données brutes
 
-    const filteredData = data.accounts.filter(accounts => accounts.Layout && accounts.Layout.name === "Centre");
+    // const filteredData = data.accounts.filter(accounts => accounts.Layout && accounts.Layout.name === "Centre");
+    const filteredData = data.data.filter(accounts => accounts.Layout && accounts.Layout.name === "Centre");
     console.log("Données filtrées:", filteredData); // Afficher les données après filtrage
 
     return { ...data, accounts: filteredData };
