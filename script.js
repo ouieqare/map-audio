@@ -21,8 +21,8 @@ async function fetchAllAccounts() {
     //const filteredData = jsonResponse.data.filter(account => account.Layout && account.Layout.name === "Centre");
     console.log("Données filtrées:", filteredData); // Afficher les données après filtrage
 
-    // return { ...data, accounts: filteredData };
-    return filteredData;
+    return { ...data, accounts: filteredData };
+    //return filteredData;
   } catch (error) {
     console.error("Erreur lors de la récupération des comptes : ", error);
     // Gérer l'erreur selon vos besoins
