@@ -147,13 +147,6 @@ async function initMap() {
     const centers = await fetchAllAccounts(); // Récupère directement le tableau filtré
     window.centers = centers.map(mapAccountData); // Applique mapAccountData pour transformer les données
 
-    var mapCenter = { lat: 48.8566, lng: 2.3522 };
-    map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: mapCenter,
-      styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }],
-    });
-
   var center = { lat: 48.8566, lng: 2.3522 };
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
