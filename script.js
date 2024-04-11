@@ -34,7 +34,7 @@ async function fetchAllAccounts() {
       throw new Error("Les données attendues ne sont pas présentes dans la réponse");
     }
 
-    const filteredData = jsonResponse.data.filter(account => data.Layout && account.Layout.name === "Centre");
+    const filteredData = jsonResponse.data.filter(account => data.Layout && data.Layout.name === "Centre");
     console.log("Données filtrées:", filteredData);
 
     return filteredData;
