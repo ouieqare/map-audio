@@ -136,8 +136,8 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
 
 async function initMap() {
-  const data = await fetchAllAccounts();
-  const centers = data.data
+  const centers = await fetchAllAccounts();
+  //const centers = data.data
     // .filter((center) => center.Disposition === "Centre")
     // .filter((center) => center.Maison_m_re === false)
     // .filter((center) => center.Sleeping === false)
