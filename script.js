@@ -32,15 +32,13 @@ async function fetchAllAccounts() {
 
     if (!jsonResponse || !jsonResponse.data || !Array.isArray(jsonResponse.data)) {
       console.error("Les données attendues ne sont pas présentes dans la réponse ou ne sont pas un tableau");
-      return []; // Retourne un tableau vide pour éviter d'autres erreurs
+      return [];
     }
 
-    const filteredData = jsonResponse.data.filter(account => account.Layout && account.Layout.name === "Centre");
-    console.log("Données filtrées:", filteredData);
-
-    return filteredData;
+    return jsonResponse.data.filter(account => account.Layout && account.Layout.name === "Centre");
   } catch (error) {
     console.error("Erreur lors de la récupération des comptes : ", error);
+    return [];
   }
 }
 
@@ -159,12 +157,12 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 //   });
 //   window.map = map;
 
-async function initMap() {
+window.initMap = async function() {
   try {
     const centers = await fetchAllAccounts(); // 'centers' reçoit directement le tableau filtré
     // Pas besoin de .accounts ici, car 'centers' est déjà le tableau des données filtrées
 
-    window.centers = centers;
+    window.centers = centers.map(mapAccountData);
 
     var mapCenter = { lat: 48.8566, lng: 2.3522 };
     map = new google.maps.Map(document.getElementById("map"), {
