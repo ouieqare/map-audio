@@ -139,9 +139,9 @@ async function initMap() {
   const centers = await fetchAllAccounts();
   //const centers = data.data
     // .filter((center) => center.Disposition === "Centre")
-    // .filter((center) => center.Maison_m_re === false)
-    // .filter((center) => center.Sleeping === false)
-    //.map(mapAccountData);
+    .filter((center) => center.Maison_m_re === false)
+    .filter((center) => center.Sleeping === false)
+    .map(mapAccountData);
   window.centers = centers;
     
   var center = { lat: 48.8566, lng: 2.3522 };
