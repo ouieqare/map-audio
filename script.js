@@ -136,13 +136,23 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
 
 async function initMap() {
-  const data = await fetchAllAccounts();
-  const centers = data.accounts
-    // .filter((center) => center.Disposition === "Centre")
-    .filter((center) => center.Maison_m_re === false)
-    .filter((center) => center.Sleeping === false)
-    .map(mapAccountData);
-  window.centers = centers;
+  // const data = await fetchAllAccounts();
+  // const centers = data.accounts
+  //   // .filter((center) => center.Disposition === "Centre")
+  //   .filter((center) => center.Maison_m_re === false)
+  //   .filter((center) => center.Sleeping === false)
+  //   .map(mapAccountData);
+  // window.centers = centers;
+    try {
+    const centers = await fetchAllAccounts(); // Récupère directement le tableau filtré
+    window.centers = centers.map(mapAccountData); // Applique mapAccountData pour transformer les données
+
+    var mapCenter = { lat: 48.8566, lng: 2.3522 };
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: mapCenter,
+      styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }],
+    });
 
   var center = { lat: 48.8566, lng: 2.3522 };
   map = new google.maps.Map(document.getElementById("map"), {
@@ -156,26 +166,6 @@ async function initMap() {
     ],
   });
   window.map = map;
-
-// window.initMap = async function() {
-//   try {
-//     const centers = await fetchAllAccounts(); // 'centers' reçoit directement le tableau filtré
-//     // Pas besoin de .accounts ici, car 'centers' est déjà le tableau des données filtrées
-
-//     window.centers = centers.map(mapAccountData);
-
-//     var mapCenter = { lat: 48.8566, lng: 2.3522 };
-//     map = new google.maps.Map(document.getElementById("map"), {
-//       zoom: 12,
-//       center: mapCenter,
-//       styles: [
-//         {
-//           featureType: "poi",
-//           stylers: [{ visibility: "off" }],
-//         },
-//       ],
-//     });
-//     window.map = map;
 
   // Ajout de l'autocomplétion
   var input = document.getElementById('start'); 
