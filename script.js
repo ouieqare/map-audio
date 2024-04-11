@@ -136,24 +136,15 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
 
 async function initMap() {
-  const centers = await fetchAllAccounts();
-  //const centers = data.data
-    // .filter((center) => center.Disposition === "Centre")
-    // .filter((center) => center.Maison_m_re === false)
-    // .filter((center) => center.Sleeping === false)
-    .map(mapAccountData);
+  const centersData = await fetchAllAccounts();
+  const centers = centersData.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
   window.centers = centers;
-    
+  
   var center = { lat: 48.8566, lng: 2.3522 };
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
     center: center,
-    styles: [
-      {
-        featureType: "poi",
-        stylers: [{ visibility: "off" }],
-      },
-    ],
+    styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }],
   });
   window.map = map;
 
