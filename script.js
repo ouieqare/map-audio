@@ -183,7 +183,7 @@ async function initMap() {
     geocoder.geocode({ address: center.address }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         var location = results[0].geometry.location;
-        var marker = new google.maps.Marker({
+        var marker = new google.maps.marker.AdvancedMarkerElement({
           map: map,
           position: location,
           icon: getMarkerIcon(center),
@@ -272,7 +272,7 @@ function calculateDistance() {
       if (startStatus === google.maps.GeocoderStatus.OK) {
         var startLocation = startResults[0].geometry.location;
 
-        startMarker = new google.maps.Marker({
+        startMarker = new google.maps.marker.AdvancedMarkerElement({
                     map: map,
                     position: startLocation,
                     icon: "http://maps.google.com/mapfiles/kml/paddle/go.png",
@@ -695,7 +695,7 @@ function addAppointmentMarker(appointment) {
     { address: appointment.location },
     function (results, status) {
       if (status === "OK") {
-        var marker = new google.maps.Marker({
+        var marker = new google.maps.marker.AdvancedMarkerElement({
           map: window.map,
           position: results[0].geometry.location,
           icon: "http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png", // Icône bleue
