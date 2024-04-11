@@ -30,11 +30,12 @@ async function fetchAllAccounts() {
     const jsonResponse = await response.json();
     console.log("Réponse complète:", jsonResponse);
 
-    if (!jsonResponse || !jsonResponse.data) {
-      throw new Error("Les données attendues ne sont pas présentes dans la réponse");
+    if (!jsonResponse || !jsonResponse.data || !Array.isArray(jsonResponse.data)) {
+      console.error("Les données attendues ne sont pas présentes dans la réponse ou ne sont pas un tableau");
+      return []; // Retourne un tableau vide pour éviter d'autres erreurs
     }
 
-    const filteredData = jsonResponse.data.filter(account => data.Layout && data.Layout.name === "Centre");
+    const filteredData = jsonResponse.data.filter(account => account.Layout && account.Layout.name === "Centre");
     console.log("Données filtrées:", filteredData);
 
     return filteredData;
