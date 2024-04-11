@@ -136,17 +136,14 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
 
 async function initMap() {
-  // const data = await fetchAllAccounts();
-  // const centers = data.accounts
-  //   // .filter((center) => center.Disposition === "Centre")
-  //   .filter((center) => center.Maison_m_re === false)
-  //   .filter((center) => center.Sleeping === false)
-  //   .map(mapAccountData);
-  // window.centers = centers;
-    try {
-    const centers = await fetchAllAccounts(); // Récupère directement le tableau filtré
-    window.centers = centers.map(mapAccountData); // Applique mapAccountData pour transformer les données
-
+  const data = await fetchAllAccounts();
+  const centers = data.accounts
+    // .filter((center) => center.Disposition === "Centre")
+    .filter((center) => center.Maison_m_re === false)
+    .filter((center) => center.Sleeping === false)
+    .map(mapAccountData);
+  window.centers = centers;
+    
   var center = { lat: 48.8566, lng: 2.3522 };
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
