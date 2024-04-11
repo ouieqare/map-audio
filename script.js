@@ -137,7 +137,13 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
 async function initMap() {
   const centersData = await fetchAllAccounts();
-  const centers = centersData.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
+
+const filteredCenters = centersData
+    .filter(center => center.Disposition === "Centre") // Gardez seulement les centres
+    .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
+    .filter(center => !center.Sleeping);
+    
+  const centers = filteredCenters.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
   window.centers = centers;
   
   var center = { lat: 48.8566, lng: 2.3522 };
