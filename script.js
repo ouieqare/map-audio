@@ -139,8 +139,8 @@ async function initMap() {
   const data = await fetchAllAccounts();
   const centers = data.data
     // .filter((center) => center.Disposition === "Centre")
-    .filter((center) => center.Maison_m_re === false)
-    .filter((center) => center.Sleeping === false)
+    // .filter((center) => center.Maison_m_re === false)
+    // .filter((center) => center.Sleeping === false)
     .map(mapAccountData);
   window.centers = centers;
     
