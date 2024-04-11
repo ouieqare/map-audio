@@ -141,7 +141,7 @@ async function initMap() {
     // .filter((center) => center.Disposition === "Centre")
     // .filter((center) => center.Maison_m_re === false)
     // .filter((center) => center.Sleeping === false)
-    // .map(mapAccountData);
+    .map(mapAccountData);
   window.centers = centers;
     
   var center = { lat: 48.8566, lng: 2.3522 };
