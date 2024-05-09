@@ -718,13 +718,4 @@ function addMarkerListener(marker, appointment) {
     openInfoWindow = infoWindow; // Mettre à jour l'info-bulle ouverte actuellement
   });
 
-window.onload = function() {
-  var startInput = document.getElementById("start");
-  if (startInput) {
-    startInput.addEventListener("change", geocodeStartAddress);
-  } else {
-    console.error("L'élément 'start' n'existe pas.");
-  }
-};
-
 }
