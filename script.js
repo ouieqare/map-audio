@@ -130,7 +130,7 @@ async function initMap() {
     // .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
     // .filter(center => !center.Sleeping);
     
-  const centers = centerData.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
+  const centers = centersData.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
   console.log("Centers after mapping:", centers);
 
   window.centers = centers;
