@@ -169,7 +169,6 @@ const filteredCenters = centersData
           position: location,
           icon: getMarkerIcon(center),
         });
-        console.log("Marqueur créé pour:", center.name);
 
         var infoWindowContent =
           '<div style="font-family: Arial, sans-serif; background-color: #fff; padding: 10px; border: 1px solid #333; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 300px;">' +
@@ -714,7 +713,6 @@ function addMarkerListener(marker, appointment) {
   });
 
   marker.addListener("click", function () {
-      console.log("Marqueur cliqué:", center.name); // Vérifie quel marqueur est cliqué
     // Fermer l'info-bulle précédente si elle est ouverte
     if (openInfoWindow) {
       openInfoWindow.close();
