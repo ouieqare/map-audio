@@ -102,7 +102,17 @@ function addDistanceCalculationContainer() {
   toggleButton.onclick = toggleDistanceContainer;
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
-  
+  var cancelButton = document.createElement('button');
+cancelButton.textContent = 'Annuler';
+cancelButton.style.backgroundColor = '#ff6347';  // Couleur rouge tomate pour le bouton annuler
+cancelButton.style.color = '#fff';
+cancelButton.style.border = 'none';
+cancelButton.style.padding = '10px 15px';
+cancelButton.style.borderRadius = '5px';
+cancelButton.style.cursor = 'pointer';
+cancelButton.style.marginLeft = '10px'; // Ajoute un peu d'espace entre les boutons
+cancelButton.onclick = cancelDistanceCalculation;
+map.controls[google.maps.ControlPosition.TOP_RIGHT].push(cancelButton);
   
 // Ajouter le bouton pour afficher/masquer la section de calcul de distance
 var toggleButton = document.createElement('button');
@@ -118,6 +128,33 @@ toggleButton.onclick = toggleLegendContainer;
 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
 }
+
+function cancelDistanceCalculation() {
+  // Effacer les champs de recherche
+  document.getElementById('start').value = '';
+  document.getElementById('end').value = '';
+
+  // Effacer le marqueur de départ
+  if (startMarker) {
+    startMarker.setMap(null);
+    startMarker = null;
+  }
+
+  // Effacer le trajet affiché
+  if (window.directionsDisplay) {
+    window.directionsDisplay.setDirections({routes: []});
+  }
+
+  // Effacer les résultats de distance et durée
+  var resultElement = document.getElementById("distance-result");
+  resultElement.innerHTML = '';
+
+  // Fermer toute info-bulle ouverte
+  if (openInfoWindow) {
+    openInfoWindow.close();
+  }
+}
+
 
 
 
