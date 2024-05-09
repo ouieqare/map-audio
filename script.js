@@ -169,6 +169,7 @@ const filteredCenters = centersData
           position: location,
           icon: getMarkerIcon(center),
         });
+        console.log("Marqueur créé pour:", center.name);
 
         var infoWindowContent =
           '<div style="font-family: Arial, sans-serif; background-color: #fff; padding: 10px; border: 1px solid #333; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 300px;">' +
