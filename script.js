@@ -35,7 +35,7 @@ async function fetchAllAccounts() {
       return [];
     }
 
-    return jsonResponse.data.filter(account => account.Layout && account.Layout.name === "Centre");
+    return jsonResponse.data.filter(account => account.Disposition && account.Disposition.name === "Centre");
   } catch (error) {
     console.error("Erreur lors de la récupération des comptes : ", error);
     return [];
