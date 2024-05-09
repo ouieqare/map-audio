@@ -138,7 +138,7 @@ async function initMap() {
   var mapCenter = { lat: 48.8566, lng: 2.3522 };
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
-    center: center,
+    center: mapCenter,
     styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }],
   });
   window.map = map;
