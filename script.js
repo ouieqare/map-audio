@@ -547,11 +547,11 @@ document
   .getElementById("start")
   .addEventListener("change", geocodeStartAddress);
 
-function gapiLoaded() {
-  gapi.load("client", initializeGapiClient);
-  let date = new Date();
-  setDate(date);
-}
+// function gapiLoaded() {
+//   gapi.load("client", initializeGapiClient);
+//   let date = new Date();
+//   setDate(date);
+// }
 
 // function initializeGapiClient() {
 //   return gapi.client
