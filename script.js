@@ -126,6 +126,8 @@ const filteredCenters = centersData
     .filter(center => !center.Sleeping);
     
   const centers = filteredCenters.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
+  console.log("Centers after mapping:", centers);
+
   window.centers = centers;
   
   var center = { lat: 48.8566, lng: 2.3522 };
