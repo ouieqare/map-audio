@@ -553,20 +553,20 @@ function gapiLoaded() {
   setDate(date);
 }
 
-function initializeGapiClient() {
-  return gapi.client
-    .init({
-      apiKey: "AIzaSyBLx2sI2_nIAlAfQ10FKaq8s_2Zd7EhQVw",
-      clientId:
-        "513516336164-5o81eom8k8s03lgsrj0gd4mp6auuu4d9.apps.googleusercontent.com",
-      scope: "https://www.googleapis.com/auth/calendar.readonly",
-      cookiePolicy: "single_host_origin",
-      discoveryDocs: [
-        "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-      ],
-    })
-    .then(loadAppointments);
-}
+// function initializeGapiClient() {
+//   return gapi.client
+//     .init({
+//       apiKey: "AIzaSyBLx2sI2_nIAlAfQ10FKaq8s_2Zd7EhQVw",
+//       clientId:
+//         "513516336164-5o81eom8k8s03lgsrj0gd4mp6auuu4d9.apps.googleusercontent.com",
+//       scope: "https://www.googleapis.com/auth/calendar.readonly",
+//       cookiePolicy: "single_host_origin",
+//       discoveryDocs: [
+//         "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+//       ],
+//     })
+//     .then(loadAppointments);
+// }
 
 //Format date to Paris UTC
 function setDate(date) {
@@ -607,31 +607,31 @@ function loadAppointments() {
   });
 }
 
-async function getDayAppointments(date) {
-  clearPreviousMarkers();
+// async function getDayAppointments(date) {
+//   clearPreviousMarkers();
 
-  let startDate = getStartDate(date);
-  let endDate = getEndDate(date);
+//   let startDate = getStartDate(date);
+//   let endDate = getEndDate(date);
 
-  return gapi.client.calendar.events
-    .list({
-      calendarId: "icmproductivity@gmail.com",
-      timeMin: startDate.toISOString(),
-      timeMax: endDate.toISOString(),
-      showDeleted: false,
-      singleEvents: true,
-      orderBy: "startTime",
-    })
-    .then(function (response) {
-      return response.result.items.map(function (appointment) {
-        updateAppointmentDateTime(appointment);
-        if (appointment.location) {
-          addAppointmentMarker(appointment);
-        }
-        return appointment;
-      });
-    });
-}
+//   return gapi.client.calendar.events
+//     .list({
+//       calendarId: "icmproductivity@gmail.com",
+//       timeMin: startDate.toISOString(),
+//       timeMax: endDate.toISOString(),
+//       showDeleted: false,
+//       singleEvents: true,
+//       orderBy: "startTime",
+//     })
+//     .then(function (response) {
+//       return response.result.items.map(function (appointment) {
+//         updateAppointmentDateTime(appointment);
+//         if (appointment.location) {
+//           addAppointmentMarker(appointment);
+//         }
+//         return appointment;
+//       });
+//     });
+// }
 
 function clearPreviousMarkers() {
   if (!window.eventMarkers) {
@@ -642,31 +642,31 @@ function clearPreviousMarkers() {
   });
 }
 
-function getStartDate(date) {
-  let startDate = new Date(date);
-  const offset = startDate.getTimezoneOffset() + 1 * 60; // Add 2 hours for French timezone (UTC+2)
-  return new Date(startDate.getTime() + offset * 60 * 1000);
-}
+// function getStartDate(date) {
+//   let startDate = new Date(date);
+//   const offset = startDate.getTimezoneOffset() + 1 * 60; // Add 2 hours for French timezone (UTC+2)
+//   return new Date(startDate.getTime() + offset * 60 * 1000);
+// }
 
-function getEndDate(date) {
-  let endDate = new Date(date);
-  const offset = endDate.getTimezoneOffset() + 1 * 60; // Add 2 hours for French timezone (UTC+2)
-  endDate = new Date(endDate.getTime() + (offset + 1) * 60 * 1000);
-  endDate.setDate(endDate.getDate() + 1);
-  return endDate;
-}
+// function getEndDate(date) {
+//   let endDate = new Date(date);
+//   const offset = endDate.getTimezoneOffset() + 1 * 60; // Add 2 hours for French timezone (UTC+2)
+//   endDate = new Date(endDate.getTime() + (offset + 1) * 60 * 1000);
+//   endDate.setDate(endDate.getDate() + 1);
+//   return endDate;
+// }
 
-function updateAppointmentDateTime(appointment) {
-  // Convert time to french ones
-  let start = new Date(appointment.start.dateTime);
-  let end = new Date(appointment.end.dateTime);
-  appointment.start.dateTime = start.toLocaleString("fr-FR", {
-    timeZone: "Europe/Paris",
-  });
-  appointment.end.dateTime = end.toLocaleString("fr-FR", {
-    timeZone: "Europe/Paris",
-  });
-}
+// function updateAppointmentDateTime(appointment) {
+//   // Convert time to french ones
+//   let start = new Date(appointment.start.dateTime);
+//   let end = new Date(appointment.end.dateTime);
+//   appointment.start.dateTime = start.toLocaleString("fr-FR", {
+//     timeZone: "Europe/Paris",
+//   });
+//   appointment.end.dateTime = end.toLocaleString("fr-FR", {
+//     timeZone: "Europe/Paris",
+//   });
+// }
 
 function addAppointmentMarker(appointment) {
   var geocoder = new google.maps.Geocoder();
