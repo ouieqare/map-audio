@@ -142,6 +142,8 @@ function cancelDistanceCalculation() {
   if (openInfoWindow) {
     openInfoWindow.close();
   }
+  map.setCenter({lat: 48.8566, lng: 2.3522}); // Centre sur Paris
+  map.setZoom(12); // Réglez le niveau de zoom pour une vue générale
 }
 
 
