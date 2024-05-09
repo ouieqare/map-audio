@@ -125,12 +125,12 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 async function initMap() {
   const centersData = await fetchAllAccounts();
 
-const filteredCenters = centersData
-    .filter(center => center.Layout === "Centre") // Gardez seulement les centres
+// const filteredCenters = centersData
+//     .filter(center => center.Layout === "Centre") // Gardez seulement les centres
     // .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
     // .filter(center => !center.Sleeping);
     
-  const centers = filteredCenters.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
+  const centers = centerData.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
   console.log("Centers after mapping:", centers);
 
   window.centers = centers;
@@ -165,7 +165,7 @@ const filteredCenters = centersData
 
   var geocoder = new google.maps.Geocoder();
 
-  centers.forEach(function (center) {
+  centers.forEach(function (center,index) {
     geocoder.geocode({ address: center.address }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         var location = results[0].geometry.location;
