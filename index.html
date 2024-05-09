@@ -73,29 +73,20 @@
  
 
   <script>
-//   document.addEventListener('DOMContentLoaded', (event) => {
-//     setTimeout(() => {
-//         document.getElementById('loadingCircle').style.display = 'none';
-//     }, 6000);
-// });
-  
-  document.addEventListener('DOMContentLoaded', function() {
-  var startInput = document.getElementById('start');
-  if (startInput) {
-    startInput.addEventListener('change', geocodeStartAddress);
-  } else {
-    console.error('Element #start non trouvé');
-  }
-  
-  // Autres initialisations ici
+  document.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(() => {
+        document.getElementById('loadingCircle').style.display = 'none';
+    }, 6000);
 });
+  
+
 
   
   
   </script>
 
   
- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBezZcI6VM1BqZTil3rayRwhaXs7ucJGtg&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1" async defer></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBezZcI6VM1BqZTil3rayRwhaXs7ucJGtg&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_autocomplete_v1" async defer></script>
  
   <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
   
