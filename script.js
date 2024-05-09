@@ -714,6 +714,7 @@ function addMarkerListener(marker, appointment) {
   });
 
   marker.addListener("click", function () {
+      console.log("Marqueur cliqué:", center.name); // Vérifie quel marqueur est cliqué
     // Fermer l'info-bulle précédente si elle est ouverte
     if (openInfoWindow) {
       openInfoWindow.close();
