@@ -543,30 +543,39 @@ function focusStartInput() {
   var startInput = document.getElementById("start");
   startInput.focus();
 }
-document
-  .getElementById("start")
-  .addEventListener("change", geocodeStartAddress);
+// document
+//   .getElementById("start")
+//   .addEventListener("change", geocodeStartAddress);
 
-// function gapiLoaded() {
-//   gapi.load("client", initializeGapiClient);
-//   let date = new Date();
-//   setDate(date);
-// }
+// // function gapiLoaded() {
+// //   gapi.load("client", initializeGapiClient);
+// //   let date = new Date();
+// //   setDate(date);
+// // }
 
-// function initializeGapiClient() {
-//   return gapi.client
-//     .init({
-//       apiKey: "AIzaSyBLx2sI2_nIAlAfQ10FKaq8s_2Zd7EhQVw",
-//       clientId:
-//         "513516336164-5o81eom8k8s03lgsrj0gd4mp6auuu4d9.apps.googleusercontent.com",
-//       scope: "https://www.googleapis.com/auth/calendar.readonly",
-//       cookiePolicy: "single_host_origin",
-//       discoveryDocs: [
-//         "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-//       ],
-//     })
-//     .then(loadAppointments);
-// }
+// // function initializeGapiClient() {
+// //   return gapi.client
+// //     .init({
+// //       apiKey: "AIzaSyBLx2sI2_nIAlAfQ10FKaq8s_2Zd7EhQVw",
+// //       clientId:
+// //         "513516336164-5o81eom8k8s03lgsrj0gd4mp6auuu4d9.apps.googleusercontent.com",
+// //       scope: "https://www.googleapis.com/auth/calendar.readonly",
+// //       cookiePolicy: "single_host_origin",
+// //       discoveryDocs: [
+// //         "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+// //       ],
+// //     })
+// //     .then(loadAppointments);
+// // }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var startInput = document.getElementById("start");
+  if (startInput) {
+    startInput.addEventListener("change", geocodeStartAddress);
+  } else {
+    console.error("L'élément 'start' n'existe pas.");
+  }
+});
 
 //Format date to Paris UTC
 function setDate(date) {
