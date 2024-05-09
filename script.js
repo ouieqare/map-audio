@@ -3,27 +3,6 @@ var markers = [];
 var startMarker;
 var openInfoWindow = null;
 
-
-// async function fetchAllAccounts() {
-//   try {
-//     const response = await fetch("https://asia-south1-mentorwise-384110.cloudfunctions.net/zoho-retriever");
-//     // return response.json();
-    
-    
-//     const data = await response.json();
-//     console.log("Données reçues:", data); // Afficher les données brutes
-    
-
-
-//     const filteredData = data.accounts.filter(accounts => accounts.Layout && accounts.Layout.name === "Centre");
-//     console.log("Données filtrées:", filteredData); // Afficher les données après filtrage
-
-//     return { ...data, accounts: filteredData };
-//   } catch (error) {
-//     console.error("Erreur lors de la récupération des comptes : ", error);
-//   }
-// }
-
 async function fetchAllAccounts() {
   try {
     const response = await fetch("https://asia-south1-mapaudio-419912.cloudfunctions.net/zohoAccountsRetrieverV2");
@@ -139,7 +118,7 @@ async function initMap() {
   const centersData = await fetchAllAccounts();
 
 const filteredCenters = centersData
-    .filter(center => center.Dispositions === "Centre") // Gardez seulement les centres
+    .filter(center => center.Disposition === "Centre") // Gardez seulement les centres
     .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
     .filter(center => !center.Sleeping);
     
@@ -246,7 +225,7 @@ const filteredCenters = centersData
   });
  
   addDistanceCalculationContainer();
-  //initializeAutocomplete();
+  initializeAutocomplete();
 }
 
 var directionsDisplay;
@@ -368,9 +347,8 @@ function getMarkerIcon(center) {
       : "square";
     var iconUrl;
     var iconSize = new google.maps.Size(30, 30); // Taille de l'icône
-
   
-    switch (markerShap) {
+    switch (markerShape) {
       case "circle blue":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
         break;
@@ -455,7 +433,7 @@ function getMarkerIcon(center) {
       default:
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
     }
-  console.log("Icon URL: ", iconUrl); // Debugging
+  
     return {
       url: iconUrl,
       size: iconSize,
