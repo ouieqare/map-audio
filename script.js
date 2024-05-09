@@ -121,7 +121,7 @@ async function initMap() {
   const centersData = await fetchAllAccounts();
 
 const filteredCenters = centersData
-    .filter(center => center.Disposition === "Centre") // Gardez seulement les centres
+    .filter(center => center.Layout === "Centre") // Gardez seulement les centres
     .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
     .filter(center => !center.Sleeping);
     
