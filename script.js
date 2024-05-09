@@ -7,6 +7,8 @@ async function fetchAllAccounts() {
   try {
     const response = await fetch("https://asia-south1-mapaudio-419912.cloudfunctions.net/zohoAccountsRetrieverV2");
     const jsonResponse = await response.json();
+    console.log("Réponse brute:", jsonResponse.data);
+
     console.log("Réponse complète:", jsonResponse);
 
     if (!jsonResponse || !jsonResponse.data || !Array.isArray(jsonResponse.data)) {
@@ -14,10 +16,10 @@ async function fetchAllAccounts() {
       return [];
     }
 
-    // return jsonResponse.data.filter(account => account.Layout && account.Layout.name === "Centre");
-return jsonResponse.data.filter(account => {
-      return account.Layout && account.Layout.name && account.Layout.name.toLowerCase() === "centre";
-    });
+    return jsonResponse.data.filter(account => account.Layout && account.Layout.name === "Centre");
+// return jsonResponse.data.filter(account => {
+//       return account.Layout && account.Layout.name && account.Layout.name.toLowerCase() === "centre";
+//     });
   } catch (error) {
     console.error("Erreur lors de la récupération des comptes : ", error);
     return [];
