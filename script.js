@@ -368,8 +368,11 @@ function getMarkerIcon(center) {
       : "square";
     var iconUrl;
     var iconSize = new google.maps.Size(30, 30); // Taille de l'icône
+
+    var iconName = `${markerShape} ${markerColor}`;
+    console.log("Icon Name: ", iconName);
   
-    switch (markerShape) {
+    switch ((iconName) {
       case "circle blue":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
         break;
@@ -452,9 +455,10 @@ function getMarkerIcon(center) {
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/orange-stars.png";
         break;
       default:
+        console.log("No matching icon found, using default");
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
     }
-  
+  console.log("Icon URL: ", iconUrl); // Debugging
     return {
       url: iconUrl,
       size: iconSize,
