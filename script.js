@@ -162,7 +162,7 @@ const filteredCenters = centersData
     geocoder.geocode({ address: center.address }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         var location = results[0].geometry.location;
-        var marker = new google.maps.Marker({
+        var marker = new google.maps.marker.AdvancedMarkerElement({
           map: map,
           position: location,
           icon: getMarkerIcon(center),
