@@ -139,7 +139,7 @@ async function initMap() {
   const centersData = await fetchAllAccounts();
 
 const filteredCenters = centersData
-    .filter(center => center.Layout === "Centre") // Gardez seulement les centres
+    .filter(center => center.Dispositions === "Centre") // Gardez seulement les centres
     .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
     .filter(center => !center.Sleeping);
     
@@ -369,10 +369,8 @@ function getMarkerIcon(center) {
     var iconUrl;
     var iconSize = new google.maps.Size(30, 30); // Taille de l'icône
 
-    var iconName = `${markerShape} ${markerColor}`;
-    console.log("Icon Name: ", iconName);
   
-    switch ((iconName) {
+    switch ((markerShap) {
       case "circle blue":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
         break;
@@ -455,7 +453,6 @@ function getMarkerIcon(center) {
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/orange-stars.png";
         break;
       default:
-        console.log("No matching icon found, using default");
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
     }
   console.log("Icon URL: ", iconUrl); // Debugging
