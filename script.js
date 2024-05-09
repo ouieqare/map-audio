@@ -370,7 +370,7 @@ function getMarkerIcon(center) {
     var iconSize = new google.maps.Size(30, 30); // Taille de l'icône
 
   
-    switch ((markerShap) {
+    switch (markerShap) {
       case "circle blue":
         iconUrl = "http://maps.google.com/mapfiles/kml/paddle/blu-circle.png";
         break;
