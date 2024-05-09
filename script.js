@@ -102,17 +102,6 @@ function addDistanceCalculationContainer() {
   toggleButton.onclick = toggleDistanceContainer;
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 
-  var cancelButton = document.createElement('button');
-cancelButton.textContent = 'Annuler';
-cancelButton.style.backgroundColor = '#ff6347';  // Couleur rouge tomate pour le bouton annuler
-cancelButton.style.color = '#fff';
-cancelButton.style.border = 'none';
-cancelButton.style.padding = '10px 15px';
-cancelButton.style.borderRadius = '5px';
-cancelButton.style.cursor = 'pointer';
-cancelButton.style.marginLeft = '10px'; // Ajoute un peu d'espace entre les boutons
-cancelButton.onclick = cancelDistanceCalculation;
-map.controls[google.maps.ControlPosition.TOP_RIGHT].push(cancelButton);
   
 // Ajouter le bouton pour afficher/masquer la section de calcul de distance
 var toggleButton = document.createElement('button');
