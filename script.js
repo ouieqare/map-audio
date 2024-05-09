@@ -246,7 +246,7 @@ const filteredCenters = centersData
   });
  
   addDistanceCalculationContainer();
-  initializeAutocomplete();
+  //initializeAutocomplete();
 }
 
 var directionsDisplay;
