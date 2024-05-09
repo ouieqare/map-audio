@@ -125,17 +125,17 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 async function initMap() {
   const centersData = await fetchAllAccounts();
 
-const filteredCenters = centersData
-    .filter(center => center.Layout === "Centre") // Gardez seulement les centres
-    .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
-    .filter(center => !center.Sleeping);
+// const filteredCenters = centersData
+//     .filter(center => center.Layout === "Centre") // Gardez seulement les centres
+//     .filter(center => !center.Maison_m_re) // Exclure les centres où Maison_m_re est true
+//     .filter(center => !center.Sleeping);
     
-  const centers = filteredCenters.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
+  const centers = centersData.map(mapAccountData); // Assurez-vous que fetchAllAccounts retourne un tableau
   console.log("Centers after mapping:", centers);
 
   window.centers = centers;
   
-  var center = { lat: 48.8566, lng: 2.3522 };
+  var mapCenter = { lat: 48.8566, lng: 2.3522 };
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
     center: center,
@@ -165,14 +165,15 @@ const filteredCenters = centersData
 
   var geocoder = new google.maps.Geocoder();
 
-  centers.forEach(function (center, index) {
+  centers.forEach(function (center) {
     geocoder.geocode({ address: center.address }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         var location = results[0].geometry.location;
-        var marker = new google.maps.marker.AdvancedMarkerElement({
+        var marker = new google.maps.Marker({
           map: map,
           position: location,
           icon: getMarkerIcon(center),
+          title: center.name
         });
 
         var infoWindowContent =
