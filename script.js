@@ -545,7 +545,7 @@ function focusStartInput() {
 }
 document
   .getElementById("start")
-  .addEventListener("change", geocodeStartAddress);
+  // .addEventListener("change", geocodeStartAddress);
 
 // function gapiLoaded() {
 //   gapi.load("client", initializeGapiClient);
