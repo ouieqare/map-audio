@@ -170,13 +170,14 @@ async function initMap() {
   });
   window.map = map;
 
-  // Ajout de l'autocomplétion
-  var input = document.getElementById('start'); 
+   // Configuration des restrictions pour la France
   var autocompleteOptions = {
     types: ['geocode'],
-    componentRestrictions: { country: 'fr' }
+    componentRestrictions: { country: 'FR' }
   };
 
+  // Ajout de l'autocomplétion
+  var input = document.getElementById('start'); 
   var autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
   autocomplete.bindTo('bounds', map);
 
