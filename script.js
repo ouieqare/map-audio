@@ -176,12 +176,8 @@ async function initMap() {
     componentRestrictions: { country: 'FR' }
   };
 
-  // Ajout de l'autocomplétion
   var input = document.getElementById('start'); 
-  var autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode'],
-        componentRestrictions: { country: 'FR' }
-    });
+  var autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
   autocomplete.bindTo('bounds', map);
 
   // Gérer la sélection d'un lieu
