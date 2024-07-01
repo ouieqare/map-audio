@@ -178,7 +178,10 @@ async function initMap() {
 
   // Ajout de l'autocomplétion
   var input = document.getElementById('start'); 
-  var autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
+  var autocomplete = new google.maps.places.Autocomplete(input, {
+        types: ['geocode'],
+        componentRestrictions: { country: 'FR' }
+    });
   autocomplete.bindTo('bounds', map);
 
   // Gérer la sélection d'un lieu
